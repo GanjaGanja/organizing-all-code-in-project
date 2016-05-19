@@ -1,0 +1,22 @@
+// Settings
+@bowerDir: "../../bower_components";
+@npmDir: "../../node_modules";
+
+// Core
+@import "_variables";
+
+// Mixins
+@import "mixins/**";
+
+// Library
+@import "modules/_normalize";
+
+// Package managers
+// @import "@{bowerDir}/normalize-less/normalize";
+@import "@{bowerDir}/bootstrap/less/bootstrap.less";
+
+// Modules
+@import "modules/!(_normalize)**";
+@import "components/**";
+@import "partials/**";
+@import "pages/**";

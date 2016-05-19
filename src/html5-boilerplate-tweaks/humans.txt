@@ -1,0 +1,10 @@
+/* TEAM */
+	Creator: Name Surname
+	Contact: email [at] gmail.com
+	From: Country, City
+
+/* SITE */
+	Last update:2016/05/12
+	Language: Russian / English
+	Doctype:HTML5
+	IDE: Sublime Text

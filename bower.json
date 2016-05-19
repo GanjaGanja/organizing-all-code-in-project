@@ -1,0 +1,23 @@
+{
+  "name": "organizing-css-code-in-project",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "GanjaGanja <ochenj.gorkyj@users.noreply.github.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.3",
+    "normalize-less": "*"
+  }
+}
