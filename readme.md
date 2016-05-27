@@ -55,6 +55,7 @@ NPM, Bower, Less, Gulp и множество утилит для него.
   * _header.less
   * _main.less
   * _footer.less
+* **_bootstrap_components.less** _компоненты Bootstrap_ 
 * **_variables.less** _глобальные константы_
 * **styles.less** _точка входа для всех стилей_
 
