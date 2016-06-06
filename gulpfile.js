@@ -31,6 +31,8 @@ var path = {
     style: 'src/styles/styles.less',
     img: 'src/img/**/*.*',
     fonts: 'src/fonts/**/*.*',
+    fonts_bootstrap: 'bower_components/bootstrap/fonts/**/*.*',
+    fonts_awesome: 'bower_components/font-awesome/fonts/**/*.*',
     tweaks: 'src/html5-boilerplate-tweaks/**/*.*'
   },
   watch: {
@@ -49,7 +51,7 @@ var config = {
   server: {
     baseDir: "./build"
   },
-  tunnel: true,
+  tunnel: false, // remote testing is off
   host: 'localhost',
   port: 9000,
   logPrefix: "Frontend_Devil"
@@ -114,6 +116,14 @@ gulp.task('fonts:build', function() {
   gulp.src(path.src.fonts)
     .pipe(gulp.dest(path.build.fonts));
 });
+gulp.task('fonts_bootstrap:build', function() {
+  gulp.src(path.src.fonts_bootstrap)
+    .pipe(gulp.dest(path.build.fonts));
+});
+gulp.task('fonts_awesome:build', function() {
+  gulp.src(path.src.fonts_awesome)
+    .pipe(gulp.dest(path.build.fonts));
+});
 
 // Copy HTML5 Boilerplate tweaks.
 gulp.task('tweaks:build', function() {
@@ -130,6 +140,8 @@ gulp.task('build', [
   'js:build',
   'image:build',
   'fonts:build',
+  // 'fonts_bootstrap:build',
+  // 'fonts_awesome:build',
   'tweaks:build'
 ]);
 
