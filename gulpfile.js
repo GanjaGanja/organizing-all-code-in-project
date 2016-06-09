@@ -4,7 +4,7 @@ var rigger = require('gulp-rigger'); // import files one into another
 var less = require('gulp-less');
 var lessGlob = require('less-plugin-glob'); // add glob expressions into less
 var autoprefixer = require('gulp-autoprefixer');
-var minifyCSS = require('gulp-minify-css');
+var cleanCSS = require('gulp-clean-css');
 var gzip = require('gulp-gzip');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
@@ -78,9 +78,9 @@ gulp.task('style:build', function() {
       compress: false
     }).on('error', gutil.log))
     .pipe(autoprefixer('last 4 versions', 'ie >= 8'))
-    .pipe(gutil.env.env === 'production' ? minifyCSS({keepBreaks: false}) : gutil.noop())
+    .pipe(gutil.env.env === 'production' ? cleanCSS({compatibility: 'ie8'}) : gutil.noop())
     .pipe(gutil.env.env === 'production' ? sourcemaps.write() : gutil.noop())
-    .pipe(gutil.env.env === 'production' ? gzip() : gutil.noop())
+    // .pipe(gutil.env.env === 'production' ? gzip() : gutil.noop())
     .pipe(gulp.dest(path.build.css))
     .pipe(reload({stream: true}));
 });
@@ -93,7 +93,7 @@ gulp.task('js:build', function() {
     .pipe(gutil.env.env === 'production' ? sourcemaps.init() : gutil.noop())
     .pipe(uglify())
     .pipe(gutil.env.env === 'production' ? sourcemaps.write() : gutil.noop())
-    .pipe(gutil.env.env === 'production' ? gzip() : gutil.noop())
+    // .pipe(gutil.env.env === 'production' ? gzip() : gutil.noop())
     .pipe(gulp.dest(path.build.js))
     .pipe(reload({stream: true}));
 });
