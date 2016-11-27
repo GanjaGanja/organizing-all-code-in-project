@@ -11,6 +11,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
+var spritesmith = require('gulp.spritesmith');
 var browserSync = require("browser-sync");
 var reload = browserSync.reload;
 var rimraf = require('rimraf'); // erase files and folders
@@ -30,6 +31,7 @@ var path = {
     js: 'src/js/main.js',
     style: 'src/styles/styles.less',
     img: 'src/img/**/*.*',
+    img_sprite: 'src/img-sprite/**/*.*',
     fonts: 'src/fonts/**/*.*',
     fonts_bootstrap: 'bower_components/bootstrap/fonts/**/*.*',
     fonts_awesome: 'bower_components/font-awesome/fonts/**/*.*',
@@ -40,6 +42,7 @@ var path = {
     js: 'src/js/**/*.js',
     style: 'src/styles/**/*.less',
     img: 'src/img/**/*.*',
+    img_sprite: 'src/img-sprite/**/*.*',
     fonts: 'src/fonts/**/*.*',
     tweaks: 'src/html5-boilerplate-tweaks/**/*.*'
   },
@@ -98,6 +101,22 @@ gulp.task('js:build', function() {
     .pipe(reload({stream: true}));
 });
 
+// Make sprite
+gulp.task('sprite:build', function() {
+  var spriteData = 
+    gulp.src(path.src.img_sprites)
+      .pipe(spritesmith({
+        imgName: 'sprite.png',
+        cssName: '_sprite.less',
+        cssFormat: 'css',
+        algorithm: 'top-down'
+      }));
+
+  spriteData.img.pipe(gulp.dest('src/img/'));
+  spriteData.css.pipe(gulp.dest('src/styles/modules/'))
+   .pipe(reload({stream: true}));
+});
+
 // Compress images.
 gulp.task('image:build', function() {
   gulp.src(path.src.img)
@@ -138,6 +157,7 @@ gulp.task('build', [
   'html:build',
   'style:build',
   'js:build',
+  // 'sprite:build',
   'image:build',
   'fonts:build',
   // 'fonts_bootstrap:build',
@@ -155,6 +175,9 @@ gulp.task('watch', function(){
   });
   gulp.watch([path.watch.js], function(event, cb) {
     gulp.start('js:build');
+  });
+  gulp.watch([path.watch.img_sprite], function(event, cb) {
+    gulp.start('sprite:build');
   });
   gulp.watch([path.watch.img], function(event, cb) {
     gulp.start('image:build');
